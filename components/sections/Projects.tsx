@@ -147,9 +147,8 @@ const Projects = () => {
                             <Image
                                 src={getImagePath(project.imageUrl || '')}
                                 alt={project.title}
-                                layout="fill"
-                                objectFit="cover"
-                                className="group-hover:scale-105 transition-transform duration-300"
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
                         </div>
@@ -187,8 +186,8 @@ const Projects = () => {
                                 <Image
                                     src={getImagePath(selectedProject.imageUrl || '')}
                                     alt={selectedProject.title}
-                                    layout="fill"
-                                    objectFit="cover"
+                                    fill
+                                    className="object-cover"
                                 />
                                 <button
                                     onClick={() => setSelectedProject(null)}
