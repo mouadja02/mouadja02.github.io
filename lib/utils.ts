@@ -6,12 +6,12 @@
 export function getImagePath(imagePath: string): string {
   // Remove leading slash if present
   const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-  
+
   // In production, add basePath prefix
   if (process.env.NODE_ENV === 'production') {
     return `/MJEngi/${cleanPath}`;
   }
-  
+
   // In development, use path as-is (with leading slash)
   return `/${cleanPath}`;
 }
@@ -21,4 +21,4 @@ export function getImagePath(imagePath: string): string {
  */
 export function getAssetPath(assetPath: string): string {
   return getImagePath(assetPath);
-} 
+}
