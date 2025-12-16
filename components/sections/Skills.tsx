@@ -50,6 +50,21 @@ const skills = [
     name: 'Airflow',
     icon: 'images/airflow.png',
     description: 'Orchestrating complex data workflows and ETL pipelines.'
+  },
+  {
+    name: 'Terraform',
+    icon: 'images/hashicorp.png',
+    description: 'Infrastructure as Code for managing cloud resources and ensuring consistent deployments.'
+  },
+  {
+    name: 'n8n',
+    icon: 'images/n8n.png',
+    description: 'Building workflow automation and AI-powered integrations for intelligent applications.'
+  },
+  {
+    name: 'Pinecone',
+    icon: 'images/pinecone.png',
+    description: 'Vector database for building semantic search and AI-powered recommendation systems.'
   }
 ]
 
@@ -58,7 +73,7 @@ const Skills = () => {
   return (
     <section id="skills" className="py-24 sm:py-32">
       <SectionTitle>Technical Skills</SectionTitle>
-       <p className="text-center text-lg text-secondary-600 dark:text-secondary-400 max-w-3xl mx-auto mb-16">
+      <p className="text-center text-lg text-secondary-600 dark:text-secondary-400 max-w-3xl mx-auto mb-16">
         Here are some of the key technologies I work with. I have experience using them in various projects, from academic research to enterprise-level applications.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

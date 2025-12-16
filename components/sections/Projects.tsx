@@ -9,36 +9,95 @@ import { getImagePath } from '@/lib/utils'
 
 const projects = [
     {
-      title: 'Bitcoin Trading Platform',
-      category: 'Machine Learning',
-      description: 'A comprehensive market analysis platform combining blockchain data with reinforcement learning for trading strategy optimization.',
-      technologies: ['Snowflake', 'Python', 'TensorFlow', 'Airflow', 'Streamlit'],
-      imageUrl: 'images/bitcoin-trading.png',
-      githubUrl: '#',
-      liveUrl: '#',
-      details: {
-          features: [
-            'Real-time blockchain data pipeline for up-to-the-minute analysis.',
-            'DQN-based algorithmic trading model to identify optimal strategies.',
-            'Interactive dashboard for visualizing market data and model performance.',
-          ],
-      }
+        title: 'AWS Certifications Coach',
+        category: 'AI/Education',
+        description: 'AI-powered learning platform to help students prepare for AWS certification exams with instant answers, progress tracking, and practice tests.',
+        technologies: ['n8n', 'Snowflake', 'Streamlit', 'Python', 'AWS'],
+        imageUrl: 'images/aws-coach.png',
+        githubUrl: 'https://github.com/mouadja02/aws-certifications-coach',
+        liveUrl: 'https://aws-certifications-coach.streamlit.app/',
+        details: {
+            features: [
+                'AI-Powered Chat via n8n workflows for instant answers to AWS certification questions.',
+                'Progress Tracking with Snowflake analytics to monitor your learning journey.',
+                'Curated study resources including videos and materials for all AWS certification paths.',
+                'Practice tests with realistic exam questions to test your knowledge.',
+            ],
+        }
     },
     {
-      title: 'Cloud Data Migration',
-      category: 'Data Engineering',
-      description: 'Enterprise-scale data migration from legacy Hadoop to a modern AWS and Snowflake architecture, designed for scalability and efficiency.',
-      technologies: ['AWS', 'Snowflake', 'dbt', 'Airflow', 'Python'],
-      imageUrl: 'images/data-migration.png',
-      githubUrl: '#',
+        title: 'AWS Cost Optimization & Monitoring Tool',
+        category: 'Data Engineering',
+        description: 'Enterprise monitoring solution for Sanofi projects to optimize costs and provide visibility into AWS resource usage and service performance.',
+        technologies: ['AWS', 'Terraform', 'Python', 'CloudWatch', 'Lambda', 'Step Functions'],
+        imageUrl: 'images/aws-monitoring.png',
+        details: {
+            features: [
+                'Automated cost tracking and optimization recommendations for AWS resources.',
+                'Real-time performance monitoring using CloudWatch and custom metrics.',
+                'Infrastructure as Code with Terraform for consistent deployments.',
+            ],
+        }
     },
     {
-      title: 'Satellite IoT Routing',
-      category: 'Research',
-      description: 'Optimizing satellite communication routing algorithms for IoT devices, resulting in a published IEEE research paper.',
-      technologies: ['MATLAB', 'C++', 'Algorithm Design', 'Network Simulation'],
-      imageUrl: 'images/satellite-iot.png',
-      liveUrl: 'https://ieeexplore.ieee.org/document/10667193/',
+        title: 'AI Fitness Coaching Agent',
+        category: 'AI/Automation',
+        description: 'AI agent that transforms Hevy App workout data into personalized coaching advice delivered via Telegram.',
+        technologies: ['n8n', 'Python', 'Telegram API', 'AI/ML'],
+        imageUrl: 'images/hevy-coach.png',
+        githubUrl: 'https://github.com/mouadja02/hevy-coaching-agent',
+        details: {
+            features: [
+                'Automated analysis of workout CSV exports from Hevy App.',
+                'AI-powered personalized coaching recommendations based on your training data.',
+                'Seamless delivery of insights via Telegram bot integration.',
+            ],
+        }
+    },
+    {
+        title: 'Modern Data Engineering Platform',
+        category: 'Data Engineering',
+        description: 'End-to-end data engineering project demonstrating modern practices with cloud-native technologies and open-source tools.',
+        technologies: ['Apache Spark', 'Apache Kafka', 'AWS Glue', 'S3', 'Athena', 'Snowflake', 'Apache Iceberg', 'Docker'],
+        imageUrl: 'images/data-platform.png',
+        githubUrl: 'https://github.com/mouadja02/end2end-datawarehouse-project',
+        details: {
+            features: [
+                'Medallion architecture implementation for structured data processing.',
+                'Apache Iceberg for ACID transactions, schema evolution, and time travel capabilities.',
+                'Hybrid cloud architecture combining AWS services with Snowflake.',
+                'Real-time data streaming with Apache Kafka and distributed processing with Spark.',
+            ],
+        }
+    },
+    {
+        title: 'Bitcoin Trading Platform',
+        category: 'Machine Learning',
+        description: 'A comprehensive market analysis platform combining blockchain data with reinforcement learning for trading strategy optimization.',
+        technologies: ['Snowflake', 'Python', 'TensorFlow', 'Airflow', 'Streamlit'],
+        imageUrl: 'images/bitcoin-trading.png',
+        details: {
+            features: [
+                'Real-time blockchain data pipeline for up-to-the-minute analysis.',
+                'DQN-based algorithmic trading model to identify optimal strategies.',
+                'Interactive dashboard for visualizing market data and model performance.',
+            ],
+        }
+    },
+    {
+        title: 'Cloud Data Migration',
+        category: 'Data Engineering',
+        description: 'Enterprise-scale data migration from legacy Hadoop to a modern AWS and Snowflake architecture, designed for scalability and efficiency.',
+        technologies: ['AWS', 'Snowflake', 'dbt', 'Airflow', 'Python'],
+        imageUrl: 'images/data-migration.png',
+    },
+    {
+        title: 'Satellite IoT Routing',
+        category: 'Research',
+        description: 'Optimizing satellite communication routing algorithms for IoT devices, resulting in a published IEEE research paper.',
+        technologies: ['MATLAB', 'C++', 'Algorithm Design', 'Network Simulation'],
+        imageUrl: 'images/satellite-iot.png',
+        liveUrl: 'https://ieeexplore.ieee.org/document/10667193/',
     },
 ]
 
@@ -53,7 +112,7 @@ const Projects = () => {
     const filteredProjects = selectedCategory === 'All'
         ? projects
         : projects.filter(p => p.category === selectedCategory)
-    
+
     return (
         <section id="projects" className="py-24 sm:py-32">
             <SectionTitle>Featured Projects</SectionTitle>
@@ -64,11 +123,10 @@ const Projects = () => {
                     <button
                         key={category}
                         onClick={() => setSelectedCategory(category)}
-                        className={`px-6 py-2 text-lg font-semibold rounded-full transition-all duration-300 ${
-                            selectedCategory === category
-                                ? 'bg-primary-500 text-white shadow-lg'
-                                : 'bg-white/10 dark:bg-secondary-800/10 backdrop-blur-md border border-white/20 text-secondary-700 dark:text-secondary-300 hover:bg-white/20 dark:hover:bg-secondary-700/20'
-                        }`}
+                        className={`px-6 py-2 text-lg font-semibold rounded-full transition-all duration-300 ${selectedCategory === category
+                            ? 'bg-primary-500 text-white shadow-lg'
+                            : 'bg-white/10 dark:bg-secondary-800/10 backdrop-blur-md border border-white/20 text-secondary-700 dark:text-secondary-300 hover:bg-white/20 dark:hover:bg-secondary-700/20'
+                            }`}
                     >
                         {category}
                     </button>
@@ -121,7 +179,7 @@ const Projects = () => {
                         onClick={() => setSelectedProject(null)}
                     >
                         <motion.div
-                            className="bg-white/10 dark:bg-secondary-800/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+                            className="bg-white dark:bg-secondary-900 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
                             layoutId={`project-card-${selectedProject.title}`}
                             onClick={(e) => e.stopPropagation()}
                         >
@@ -142,7 +200,7 @@ const Projects = () => {
                             <div className="p-8">
                                 <h2 className="text-3xl font-bold text-secondary-900 dark:text-white mb-2">{selectedProject.title}</h2>
                                 <p className="text-lg text-secondary-600 dark:text-secondary-400 mb-6">{selectedProject.description}</p>
-                                
+
                                 {selectedProject.details?.features && (
                                     <div className="mb-6">
                                         <h4 className="text-xl font-semibold mb-3 text-secondary-800 dark:text-secondary-200">Key Features</h4>
@@ -162,7 +220,7 @@ const Projects = () => {
                                         ))}
                                     </div>
                                 </div>
-                                {/*
+
                                 <div className="flex gap-4 mt-8">
                                     {selectedProject.githubUrl && (
                                         <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-secondary-700 hover:bg-secondary-600 text-white font-semibold rounded-lg transition-colors duration-300">
@@ -175,7 +233,6 @@ const Projects = () => {
                                         </a>
                                     )}
                                 </div>
-                                */}
                             </div>
                         </motion.div>
                     </motion.div>

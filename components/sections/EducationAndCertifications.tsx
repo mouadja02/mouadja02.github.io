@@ -10,7 +10,7 @@ const educationData = [
     {
         degree: "Master's in Signal & Image Processing",
         school: "ENSEIRB-MATMECA",
-        period: "2023 - 2025",
+        period: "2023 - Sep 2025",
     },
     {
         degree: "Bachelor's in Electrical & Communications",
@@ -19,18 +19,40 @@ const educationData = [
     },
     {
         degree: "Preparatory Classes MPSI/MP",
-        school: "Lycée Gustave Eiffel",
+        school: "Lycée OBA, Oujda, Morocco",
         period: "2020 - 2022",
     },
 ]
 
 const certificationsData = [
     {
+        name: 'AWS Solutions Architect - Associate',
+        issuer: 'AWS',
+        icon: 'images/aws.png',
+        status: 'In progress',
+        credentialId: null,
+    },
+    {
+        name: 'SnowPro Core Certification',
+        issuer: 'Snowflake',
+        icon: 'images/snowflake.png',
+        status: 'In progress',
+        credentialId: null,
+    },
+    {
         name: 'Data Engineering Professional Certificate',
         issuer: 'IBM',
         icon: 'images/ibm.png',
         status: 'In progress',
         credentialId: null,
+    },
+    {
+        name: 'HashiCorp Certified: Terraform Associate',
+        issuer: 'HashiCorp',
+        icon: 'images/hashicorp.png',
+        status: 'Issued',
+        credentialId: '9c4a4945-0844-4927-80d7-6fd871ee305a',
+        expirationDate: 'Nov 01, 2027',
     },
     {
         name: 'Machine Learning for Trading',
@@ -96,7 +118,7 @@ const EducationAndCertifications = () => {
                     </h3>
                     <div className="relative border-l-2 border-primary-200 dark:border-primary-800 space-y-12 pl-8">
                         {educationData.map((edu, index) => (
-                            <motion.div 
+                            <motion.div
                                 key={index}
                                 className="relative"
                                 initial={{ opacity: 0, x: -20 }}
@@ -123,7 +145,7 @@ const EducationAndCertifications = () => {
                     </h3>
                     <div className="space-y-6">
                         {certificationsData.map((cert, index) => (
-                            <motion.div 
+                            <motion.div
                                 key={index}
                                 className="flex items-center bg-white/10 dark:bg-secondary-800/10 backdrop-blur-md border border-white/20 p-4 rounded-xl transition-shadow duration-300"
                                 initial={{ opacity: 0, x: 20 }}
@@ -132,7 +154,7 @@ const EducationAndCertifications = () => {
                                 viewport={{ once: true }}
                             >
                                 <div className="w-12 h-12 mr-4 bg-white rounded-lg flex items-center justify-center p-1 shadow-sm flex-shrink-0">
-                                    <Image src={getImagePath(cert.icon)} alt={`${cert.issuer} logo`} width={40} height={40} className="object-contain"/>
+                                    <Image src={getImagePath(cert.icon)} alt={`${cert.issuer} logo`} width={40} height={40} className="object-contain" />
                                 </div>
                                 <div className="flex-grow">
                                     <h4 className="font-bold text-secondary-800 dark:text-secondary-200">{cert.name}</h4>
@@ -140,6 +162,11 @@ const EducationAndCertifications = () => {
                                     {cert.credentialId && (
                                         <p className="text-xs text-secondary-500 dark:text-secondary-400 font-mono mt-1">
                                             Credential ID: {cert.credentialId}
+                                        </p>
+                                    )}
+                                    {(cert as any).expirationDate && (
+                                        <p className="text-xs text-secondary-500 dark:text-secondary-400 mt-1">
+                                            Expires: {(cert as any).expirationDate}
                                         </p>
                                     )}
                                 </div>
@@ -153,8 +180,8 @@ const EducationAndCertifications = () => {
                             </motion.div>
                         ))}
                     </div>
-                     <p className="text-center text-sm text-secondary-500 dark:text-secondary-400 mt-8">
-                        All certifications are verified and can be validated through the Coursera and Udemy platforms.
+                    <p className="text-center text-sm text-secondary-500 dark:text-secondary-400 mt-8">
+                        All certifications are verified and can be validated through the Credly, Coursera and Udemy platforms.
                     </p>
                 </div>
             </div>

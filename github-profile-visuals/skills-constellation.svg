@@ -1,0 +1,90 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <style>
+      .constellation-line {
+        stroke: #64748b;
+        stroke-width: 1;
+        opacity: 0.3;
+        animation: pulse 3s ease-in-out infinite;
+      }
+      .tech-node {
+        fill: #0f172a;
+        stroke: #3b82f6;
+        stroke-width: 2;
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+      .tech-text {
+        font-family: 'Monaco', 'Menlo', monospace;
+        font-size: 12px;
+        fill: #e2e8f0;
+        text-anchor: middle;
+        dominant-baseline: central;
+      }
+      .primary-node {
+        fill: #3b82f6;
+        animation: mainGlow 2s ease-in-out infinite alternate;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.8; }
+      }
+      @keyframes glow {
+        0% { filter: drop-shadow(0 0 5px #3b82f6); }
+        100% { filter: drop-shadow(0 0 15px #3b82f6); }
+      }
+      @keyframes mainGlow {
+        0% { filter: drop-shadow(0 0 10px #3b82f6); }
+        100% { filter: drop-shadow(0 0 25px #3b82f6); }
+      }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="400" fill="#0f172a"/>
+  
+  <!-- Constellation Lines -->
+  <line x1="400" y1="200" x2="200" y2="100" class="constellation-line"/>
+  <line x1="400" y1="200" x2="600" y2="100" class="constellation-line"/>
+  <line x1="400" y1="200" x2="150" y2="250" class="constellation-line"/>
+  <line x1="400" y1="200" x2="650" y2="250" class="constellation-line"/>
+  <line x1="400" y1="200" x2="300" y2="320" class="constellation-line"/>
+  <line x1="400" y1="200" x2="500" y2="320" class="constellation-line"/>
+  <line x1="200" y1="100" x2="150" y2="250" class="constellation-line"/>
+  <line x1="600" y1="100" x2="650" y2="250" class="constellation-line"/>
+  
+  <!-- Central Node - Data Engineering -->
+  <circle cx="400" cy="200" r="40" class="tech-node primary-node"/>
+  <text x="400" y="190" class="tech-text">DATA</text>
+  <text x="400" y="205" class="tech-text">ENGINEERING</text>
+  
+  <!-- Tech Stack Nodes -->
+  <circle cx="200" cy="100" r="18" class="tech-node"/>
+  <text x="200" y="100" class="tech-text">GCP</text>
+  
+  <circle cx="600" cy="100" r="28" class="tech-node"/>
+  <text x="600" y="100" class="tech-text">AWS</text>
+  
+  <circle cx="150" cy="250" r="35" class="tech-node"/>
+  <text x="150" y="250" class="tech-text">Python</text>
+  
+  <circle cx="650" cy="250" r="20" class="tech-node"/>
+  <text x="650" y="250" class="tech-text">Spark</text>
+  
+  <circle cx="300" cy="320" r="27" class="tech-node"/>
+  <text x="300" y="320" class="tech-text">ML/AI</text>
+  
+  <circle cx="500" cy="320" r="23" class="tech-node"/>
+  <text x="500" y="320" class="tech-text">Docker</text>
+  
+  <!-- Additional smaller nodes -->
+  <circle cx="100" cy="150" r="25" class="tech-node"/>
+  <text x="100" y="150" class="tech-text">SQL</text>
+  
+  <circle cx="700" cy="150" r="30" class="tech-node"/>
+  <text x="700" y="140" class="tech-text">Apache</text>
+  <text x="700" y="165" class="tech-text">Stack</text>
+  
+  <!-- Connecting lines for smaller nodes -->
+  <line x1="200" y1="100" x2="100" y2="150" class="constellation-line"/>
+  <line x1="630" y1="100" x2="670" y2="130" class="constellation-line"/>
+</svg> 

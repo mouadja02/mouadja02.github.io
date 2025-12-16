@@ -50,7 +50,7 @@ const Contact = () => {
             <SectionTitle>Get In Touch</SectionTitle>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
                 {/* Contact Form */}
-                <motion.div 
+                <motion.div
                     className="bg-white/10 dark:bg-secondary-800/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -74,7 +74,7 @@ const Contact = () => {
                 </motion.div>
 
                 {/* Contact Info */}
-                <motion.div 
+                <motion.div
                     className="space-y-8"
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -91,8 +91,14 @@ const Contact = () => {
                                 </a>
                             </div>
                             <div className="flex items-center gap-4">
+                                <Mail className="h-6 w-6 text-primary-500" />
+                                <a href="mailto:mouad.jaouhari@atos.net" className="text-lg text-secondary-700 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400">
+                                    mouad.jaouhari@atos.net
+                                </a>
+                            </div>
+                            <div className="flex items-center gap-4">
                                 <MapPin className="h-6 w-6 text-primary-500" />
-                                <p className="text-lg text-secondary-700 dark:text-secondary-300">Pessac, France</p>
+                                <p className="text-lg text-secondary-700 dark:text-secondary-300">Talence, France</p>
                             </div>
                         </div>
                     </div>

@@ -46,7 +46,7 @@ const Hero = () => {
 
   const downloadResume = () => {
     const link = document.createElement('a')
-    link.href = getAssetPath('/resume.pdf')
+    link.href = getAssetPath('resume.pdf')
     link.download = 'Mouad_Jaouhari_Resume.pdf'
     link.click()
   }
