@@ -88,7 +88,7 @@ const Skills = () => {
             whileHover={{ y: -5 }}
           >
             <div className="w-20 h-20 mb-6 relative">
-              <Image src={getImagePath(skill.icon)} alt={`${skill.name} logo`} fill className="object-contain" />
+              <Image src={getImagePath(skill.icon)} alt={`${skill.name} logo`} layout="fill" objectFit="contain" />
             </div>
             <h3 className="text-xl font-bold text-secondary-900 dark:text-white mb-3">{skill.name}</h3>
             <p className="text-secondary-600 dark:text-secondary-400 leading-relaxed">{skill.description}</p>

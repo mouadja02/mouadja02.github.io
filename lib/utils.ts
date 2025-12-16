@@ -1,18 +1,12 @@
 /**
  * Get the correct image path for both development and production environments
- * In development: /images/filename.png
- * In production: /MJEngi/images/filename.png
+ * For user GitHub Pages sites (username.github.io), paths are at root level
  */
 export function getImagePath(imagePath: string): string {
   // Remove leading slash if present
   const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
 
-  // In production, add basePath prefix
-  if (process.env.NODE_ENV === 'production') {
-    return `/MJEngi/${cleanPath}`;
-  }
-
-  // In development, use path as-is (with leading slash)
+  // Always use root-level paths (no basePath needed for user sites)
   return `/${cleanPath}`;
 }
 
