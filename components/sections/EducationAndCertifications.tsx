@@ -36,15 +36,9 @@ const certificationsData = [
         name: 'SnowPro Core Certification',
         issuer: 'Snowflake',
         icon: 'images/snowflake.png',
-        status: 'In progress',
-        credentialId: null,
-    },
-    {
-        name: 'Data Engineering Professional Certificate',
-        issuer: 'IBM',
-        icon: 'images/ibm.png',
-        status: 'In progress',
-        credentialId: null,
+        status: 'Issued',
+        credentialId: 'S102284-260201-COF',
+        expirationDate: 'Feb 01, 2028'
     },
     {
         name: 'HashiCorp Certified: Terraform Associate',
