@@ -26,11 +26,26 @@ const educationData = [
 
 const certificationsData = [
     {
-        name: 'AWS Solutions Architect - Associate',
+        name: 'AWS Certified Data Engineer - Associate',
         issuer: 'AWS',
         icon: 'images/aws.png',
         status: 'In progress',
         credentialId: null,
+    },
+    {
+        name: 'SnowPro Core Advanced: Data Engineering',
+        issuer: 'Snowflake',
+        icon: 'images/snowflake.png',
+        status: 'In progress',
+        credentialId: null,
+    },
+    {
+        name: 'AWS Certified Solutions Architect - Associate',
+        issuer: 'AWS',
+        icon: 'images/aws.png',
+        status: 'Issued',
+        credentialId: 'www.credly.com/badges/7a080c61-81d7-4f33-9607-4835b1fd534f',
+        expirationDate: 'Feb 13, 2029'
     },
     {
         name: 'SnowPro Core Certification',
