@@ -33,7 +33,7 @@ const certificationsData = [
         credentialId: null,
     },
     {
-        name: 'SnowPro Core Advanced: Data Engineering',
+        name: 'SnowPro Advanced: Data Engineer',
         issuer: 'Snowflake',
         icon: 'images/snowflake.png',
         status: 'In progress',
@@ -44,7 +44,7 @@ const certificationsData = [
         issuer: 'AWS',
         icon: 'images/aws.png',
         status: 'Issued',
-        credentialId: 'www.credly.com/badges/7a080c61-81d7-4f33-9607-4835b1fd534f',
+        credentialId: '7a080c61-81d7-4f33-9607-4835b1fd534f',
         expirationDate: 'Feb 13, 2029'
     },
     {
