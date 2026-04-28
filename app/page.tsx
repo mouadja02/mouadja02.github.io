@@ -9,38 +9,52 @@ import Skills from '@/components/sections/Skills'
 import Contact from '@/components/sections/Contact'
 import EducationAndCertifications from '@/components/sections/EducationAndCertifications'
 import Footer from '@/components/Footer'
-import FloatingActionButton from '@/components/FloatingActionButton'
-import AnimatedBackground from '@/components/AnimatedBackground'
-import SectionAnimator from '@/components/SectionAnimator'
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-secondary-50 dark:bg-secondary-900 text-secondary-800 dark:text-secondary-200">
-      <AnimatedBackground />
-      <Header />
-      <Hero />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 space-y-24 sm:space-y-32">
-        <SectionAnimator>
+    <main className="relative min-h-screen bg-bg text-text-primary overflow-x-hidden">
+      {/* Background grid */}
+      <div className="fixed inset-0 bg-grid pointer-events-none z-0" />
+      
+      {/* Noise texture */}
+      <div className="fixed inset-0 noise-overlay pointer-events-none z-[1]" />
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <Header />
+        <Hero />
+        
+        <div className="relative">
           <About />
-        </SectionAnimator>
-        <SectionAnimator>
+          <div className="container mx-auto px-6 lg:px-8">
+            <hr className="hr-accent" />
+          </div>
+          
           <Skills />
-        </SectionAnimator>
-        <SectionAnimator>
-          <Experience />
-        </SectionAnimator>
-        <SectionAnimator>
+          <div className="container mx-auto px-6 lg:px-8">
+            <hr className="hr-accent" />
+          </div>
+          
           <Projects />
-        </SectionAnimator>
-        <SectionAnimator>
+          <div className="container mx-auto px-6 lg:px-8">
+            <hr className="hr-accent" />
+          </div>
+          
+          <Experience />
+          <div className="container mx-auto px-6 lg:px-8">
+            <hr className="hr-accent" />
+          </div>
+          
           <EducationAndCertifications />
-        </SectionAnimator>
-        <SectionAnimator>
+          <div className="container mx-auto px-6 lg:px-8">
+            <hr className="hr-accent" />
+          </div>
+          
           <Contact />
-        </SectionAnimator>
+        </div>
+        
+        <Footer />
       </div>
-      <Footer />
-      <FloatingActionButton />
     </main>
   )
 } 

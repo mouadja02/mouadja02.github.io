@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter, Poppins, JetBrains_Mono } from 'next/font/google'
+import { Syne, Outfit, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
-// Helper function for asset paths
 function getAssetPath(path: string): string {
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
   if (process.env.NODE_ENV === 'production') {
@@ -12,15 +11,16 @@ function getAssetPath(path: string): string {
   return `/${cleanPath}`;
 }
 
-const inter = Inter({ 
+const syne = Syne({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-syne',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
-const poppins = Poppins({ 
+const outfit = Outfit({
   subsets: ['latin'],
+  variable: '--font-outfit',
   weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-poppins',
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -30,7 +30,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mouadja02.github.io/MJEngi'),
-  title: 'MJEngi',
+  title: 'Mouad Jaouhari | Data & ML Engineer',
   description: 'Data & ML engineer with expertise in cloud computing, machine learning, and data infrastructure. Building end-to-end data pipelines and ML-powered applications.',
   keywords: ['Data Engineer', 'Machine Learning', 'ML Engineer', 'Cloud Computing', 'AWS', 'GCP', 'Snowflake', 'Python', 'Data Science', 'Mouad Jaouhari', 'MJ'],
   authors: [{ name: 'Mouad Jaouhari' }],
@@ -80,16 +80,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${poppins.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body className={`${syne.variable} ${outfit.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem
-          disableTransitionOnChange
+          disableTransitionOnChange={false}
         >
           {children}
         </ThemeProvider>
       </body>
     </html>
   )
-} 
+}

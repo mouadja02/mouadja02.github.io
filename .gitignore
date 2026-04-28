@@ -37,3 +37,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts 
+
+
+# IDEs and editors
+.idea/
+.vscode/
+.cursor/
+.opencode/

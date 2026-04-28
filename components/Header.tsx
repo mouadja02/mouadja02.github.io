@@ -2,19 +2,32 @@
 
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
-import { Sun, Moon, Menu, X } from 'lucide-react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { Menu, X, Sun, Moon } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 50)
+      
+      const sections = ['home', 'about', 'skills', 'experience', 'projects', 'education', 'contact']
+      for (const section of sections.reverse()) {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          if (rect.top <= 150) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -41,50 +54,64 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isMobileMenuOpen
-          ? 'bg-white/80 dark:bg-secondary-900/80 backdrop-blur-sm shadow-md'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? 'bg-bg/80 backdrop-blur-xl border-b border-border'
           : 'bg-transparent'
       }`}
     >
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="container mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <a
             href="#home"
             onClick={(e) => { e.preventDefault(); scrollToSection('#home') }}
-            className="text-2xl font-bold text-primary-500 hover:text-primary-600 transition-colors duration-300"
+            className="font-display text-2xl font-bold tracking-tight text-text-primary hover:text-accent transition-colors duration-300"
           >
-            MJ<span className="text-secondary-400">.</span>
+            MJ<span className="text-accent">.</span>
           </a>
 
-          <div className="hidden md:flex items-center gap-2">
-            {navItems.map(item => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => { e.preventDefault(); scrollToSection(item.href) }}
-                className="px-4 py-2 text-md font-medium text-secondary-700 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 rounded-lg transition-colors duration-300"
-              >
-                {item.name}
-              </a>
-            ))}
+          <div className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.slice(1)
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => { e.preventDefault(); scrollToSection(item.href) }}
+                  className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-300 ${
+                    isActive 
+                      ? 'text-accent' 
+                      : 'text-text-muted hover:text-text-primary'
+                  }`}
+                >
+                  {item.name}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute bottom-0 left-4 right-4 h-px bg-accent"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </a>
+              )
+            })}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-secondary-600 dark:text-secondary-400 hover:bg-secondary-100 dark:hover:bg-secondary-800"
+              className="w-10 h-10 rounded-lg bg-bg-input border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent-glow transition-all duration-300"
               aria-label="Toggle theme"
             >
-              {mounted && (theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />)}
+              {mounted && (theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />)}
             </button>
             <div className="md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-lg text-secondary-600 dark:text-secondary-400 hover:bg-secondary-100 dark:hover:bg-secondary-800"
+                className="w-10 h-10 rounded-lg bg-bg-input border border-border flex items-center justify-center text-text-primary hover:text-accent transition-colors duration-300"
                 aria-label="Toggle mobile menu"
               >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
@@ -96,15 +123,19 @@ const Header = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden"
+              className="md:hidden overflow-hidden border-t border-border"
             >
-              <div className="pt-2 pb-4 space-y-2">
-                {navItems.map(item => (
+              <div className="py-4 space-y-1">
+                {navItems.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
                     onClick={(e) => { e.preventDefault(); scrollToSection(item.href) }}
-                    className="block px-4 py-3 text-lg font-medium text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800 rounded-lg transition-colors duration-300"
+                    className={`block px-4 py-3 text-sm font-medium transition-colors duration-300 ${
+                      activeSection === item.href.slice(1)
+                        ? 'text-accent'
+                        : 'text-text-muted hover:text-text-primary'
+                    }`}
                   >
                     {item.name}
                   </a>
@@ -118,4 +149,4 @@ const Header = () => {
   )
 }
 
-export default Header 
+export default Header

@@ -1,4 +1,4 @@
-# Hi there! 👋 I'm a Data & ML Engineer
+# Hi there! 👋 I'm a Data & AI Engineer
 
 <div align="center">
   

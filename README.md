@@ -1,6 +1,6 @@
-# Data & ML Engineer Portfolio
+# Data & AI Engineer Portfolio
 
-A modern, professional portfolio website built with Next.js 14, TypeScript, and Tailwind CSS. Designed specifically for Data & ML Engineers with a focus on showcasing technical expertise, projects, and professional experience.
+A modern, professional portfolio website built with Next.js 14, TypeScript, and Tailwind CSS. Designed specifically for Data & AI Engineers with a focus on showcasing technical expertise, projects, and professional experience.
 
 ## 🚀 Features
 
@@ -250,6 +250,6 @@ If you have any questions or need help customizing the portfolio:
 
 ---
 
-**Built with ❤️ for Data & ML Engineers**
+**Built with ❤️ for Data & AI Engineers**
 
 Transform your professional presence with this modern, feature-rich portfolio template designed specifically for technical professionals in the data and machine learning space. 
