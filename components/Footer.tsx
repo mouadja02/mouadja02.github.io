@@ -16,7 +16,7 @@ const Footer = () => {
               MJ<span className="text-accent">.</span>
             </span>
             <span className="text-text-muted text-sm">|</span>
-            <span className="text-text-muted text-sm">Data & ML Engineer</span>
+            <span className="text-text-muted text-sm">Data & AI Engineer</span>
           </div>
 
           <p className="text-text-muted text-sm">

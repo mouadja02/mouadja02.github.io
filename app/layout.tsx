@@ -30,9 +30,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mouadja02.github.io/MJEngi'),
-  title: 'Mouad Jaouhari | Data & ML Engineer',
-  description: 'Data & ML engineer with expertise in cloud computing, machine learning, and data infrastructure. Building end-to-end data pipelines and ML-powered applications.',
-  keywords: ['Data Engineer', 'Machine Learning', 'ML Engineer', 'Cloud Computing', 'AWS', 'GCP', 'Snowflake', 'Python', 'Data Science', 'Mouad Jaouhari', 'MJ'],
+  title: 'Mouad Jaouhari | Data & AI Engineer',
+  description: 'Data & AI engineer with expertise in cloud computing, machine learning, and data infrastructure. Building end-to-end data pipelines and AI-powered applications.',
+  keywords: ['Data Engineer', 'Artificial Intelligence', 'AI Engineer', 'Cloud Computing', 'AWS', 'GCP', 'Snowflake', 'Python', 'Data Science', 'Mouad Jaouhari', 'MJ'],
   authors: [{ name: 'Mouad Jaouhari' }],
   creator: 'Mouad Jaouhari',
   publisher: 'Mouad Jaouhari',
@@ -48,15 +48,15 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://mouadja02.github.io/MJEngi',
-    title: 'Mouad Jaouhari | Data & ML Engineer Portfolio',
-    description: 'Data & ML engineer with expertise in cloud computing, machine learning, and data infrastructure.',
+    title: 'Mouad Jaouhari | Data & AI Engineer Portfolio',
+    description: 'Data & AI engineer with expertise in cloud computing, machine learning, and data infrastructure.',
     siteName: 'MJ Portfolio',
     images: [
       {
         url: getAssetPath('images/mj.png'),
         width: 1200,
         height: 630,
-        alt: 'Mouad Jaouhari - Data & ML Engineer',
+        alt: 'Mouad Jaouhari - Data & AI Engineer',
       },
     ],
   },
