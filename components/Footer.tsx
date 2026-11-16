@@ -1,39 +1,24 @@
-'use client'
+import { identity } from '@/lib/content'
 
-import { ArrowUp } from 'lucide-react'
-
-const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
+export default function Footer() {
   return (
-    <footer className="relative border-t border-border">
-      <div className="container mx-auto px-6 lg:px-8 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <span className="font-display text-xl font-bold text-text-primary">
-              MJ<span className="text-accent">.</span>
-            </span>
-            <span className="text-text-muted text-sm">|</span>
-            <span className="text-text-muted text-sm">Data & AI Engineer</span>
-          </div>
-
-          <p className="text-text-muted text-sm">
-            © {new Date().getFullYear()} Mouad Jaouhari. All rights reserved.
+    <footer className="border-t-2 border-ink bg-ink text-paper">
+      <div className="mx-auto max-w-doc px-4 py-12 sm:px-8">
+        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-paper/60">Important notice</p>
+        <p className="wd-narrow mt-3 max-w-3xl text-2xl font-semibold leading-8 sm:text-3xl sm:leading-9">
+          Specifications are subject to continuous improvement without notice. {identity.part} is not a replacement for
+          a team, but integrates well with one.
+        </p>
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-paper/25 pt-5 font-mono text-xs uppercase tracking-[0.1em] text-paper/70">
+          <p>
+            © {new Date().getFullYear()} {identity.name} · {identity.role}
           </p>
-
-          <button
-            onClick={scrollToTop}
-            className="group w-10 h-10 rounded-lg bg-bg-input border border-border flex items-center justify-center hover:border-accent-glow transition-all duration-300"
-            aria-label="Scroll to top"
-          >
-            <ArrowUp className="h-4 w-4 text-text-muted group-hover:text-accent transition-colors duration-300" />
-          </button>
+          <p>{identity.docId} · Rev. Nov 2026</p>
+          <a href="#overview" className="border border-paper/40 px-3 py-1.5 text-paper hover:bg-paper hover:text-ink">
+            <span aria-hidden="true">↑</span> Page 1
+          </a>
         </div>
       </div>
     </footer>
   )
 }
-
-export default Footer

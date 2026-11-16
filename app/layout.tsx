@@ -1,92 +1,53 @@
 import type { Metadata } from 'next'
-import { Syne, Outfit, JetBrains_Mono } from 'next/font/google'
+import { Archivo, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
-function getAssetPath(path: string): string {
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  if (process.env.NODE_ENV === 'production') {
-    return `/MJEngi/${cleanPath}`;
-  }
-  return `/${cleanPath}`;
-}
-
-const syne = Syne({
+const archivo = Archivo({
   subsets: ['latin'],
-  variable: '--font-syne',
-  weight: ['400', '500', '600', '700', '800'],
+  axes: ['wdth'],
+  variable: '--font-archivo',
+  display: 'swap',
 })
 
-const outfit = Outfit({
+const plexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  variable: '--font-outfit',
-  weight: ['300', '400', '500', '600', '700'],
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
+  weight: ['400', '500', '600'],
+  variable: '--font-plex-mono',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mouadja02.github.io/MJEngi'),
+  metadataBase: new URL('https://mouadja02.github.io'),
   title: 'Mouad Jaouhari | Data & AI Engineer',
-  description: 'Data & AI engineer with expertise in cloud computing, machine learning, and data infrastructure. Building end-to-end data pipelines and AI-powered applications.',
+  description:
+    'Datasheet for MJ02: Mouad Jaouhari, a data and AI engineer building cloud data pipelines, machine-learning systems and AI agents.',
   keywords: ['Data Engineer', 'Artificial Intelligence', 'AI Engineer', 'Cloud Computing', 'AWS', 'GCP', 'Snowflake', 'Python', 'Data Science', 'Mouad Jaouhari', 'MJ'],
   authors: [{ name: 'Mouad Jaouhari' }],
   creator: 'Mouad Jaouhari',
   publisher: 'Mouad Jaouhari',
   icons: {
-    icon: [
-      { url: getAssetPath('favicon.ico') },
-      { url: getAssetPath('images/mj.png'), type: 'image/png' },
-    ],
-    shortcut: getAssetPath('favicon.ico'),
-    apple: getAssetPath('images/mj.png'),
+    icon: [{ url: '/favicon.ico' }, { url: '/images/mj.png', type: 'image/png' }],
+    shortcut: '/favicon.ico',
+    apple: '/images/mj.png',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://mouadja02.github.io/MJEngi',
-    title: 'Mouad Jaouhari | Data & AI Engineer Portfolio',
-    description: 'Data & AI engineer with expertise in cloud computing, machine learning, and data infrastructure.',
-    siteName: 'MJ Portfolio',
-    images: [
-      {
-        url: getAssetPath('images/mj.png'),
-        width: 1200,
-        height: 630,
-        alt: 'Mouad Jaouhari - Data & AI Engineer',
-      },
-    ],
+    url: 'https://mouadja02.github.io',
+    title: 'Mouad Jaouhari | Data & AI Engineer',
+    description: 'Datasheet for MJ02: cloud data pipelines, machine-learning systems and AI agents.',
+    siteName: 'MJ02 Datasheet',
+    images: [{ url: '/images/mj.png', width: 500, height: 500, alt: 'Mouad Jaouhari, Data & AI Engineer' }],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+  robots: { index: true, follow: true },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${syne.variable} ${outfit.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange={false}
-        >
+      <body className={`${archivo.variable} ${plexMono.variable} antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
         </ThemeProvider>
       </body>

@@ -1,152 +1,104 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
-import { Menu, X, Sun, Moon } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { identity, nav } from '@/lib/content'
 
-const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+export default function Header() {
+  const [active, setActive] = useState('overview')
+  const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
 
+  useEffect(() => setMounted(true), [])
+
+  // Track which section crosses the upper third of the viewport.
   useEffect(() => {
-    setMounted(true)
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-      
-      const sections = ['home', 'about', 'skills', 'experience', 'projects', 'education', 'contact']
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          if (rect.top <= 150) {
-            setActiveSection(section)
-            break
-          }
-        }
-      }
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-section]'))
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id)
+        })
+      },
+      { rootMargin: '-30% 0px -65% 0px' }
+    )
+    sections.forEach((s) => observer.observe(s))
+    return () => observer.disconnect()
   }, [])
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Education', href: '#education' },
-    { name: 'Contact', href: '#contact' },
-  ]
-
-  const scrollToSection = (id: string) => {
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
-    setIsMobileMenuOpen(false)
-  }
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
+  const page = Math.max(1, nav.findIndex((n) => n.id === active) + 1)
+  const dark = mounted && resolvedTheme === 'dark'
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? 'bg-bg/80 backdrop-blur-xl border-b border-border'
-          : 'bg-transparent'
-      }`}
-    >
-      <nav className="container mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <a
-            href="#home"
-            onClick={(e) => { e.preventDefault(); scrollToSection('#home') }}
-            className="font-display text-2xl font-bold tracking-tight text-text-primary hover:text-accent transition-colors duration-300"
+    <header className="sticky top-0 z-40 border-b border-ink bg-paper">
+      <div className="mx-auto flex h-12 max-w-doc items-stretch px-4 font-mono text-xs uppercase tracking-[0.1em] sm:px-8">
+        <a href="#overview" className="flex items-center gap-3 pr-5 font-semibold" onClick={() => setOpen(false)}>
+          <span className="bg-ink px-1.5 py-0.5 text-paper">{identity.part}</span>
+          <span className="hidden sm:inline lg:hidden xl:inline">{identity.name}</span>
+        </a>
+
+        <nav aria-label="Sections" className="ml-auto hidden items-stretch lg:flex">
+          {nav.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              aria-current={active === item.id ? 'true' : undefined}
+              className={`flex items-center gap-1.5 whitespace-nowrap border-l border-ink/25 px-3 transition-colors hover:bg-ink hover:text-paper ${
+                active === item.id ? 'bg-ink text-paper' : ''
+              }`}
+            >
+              <span className="opacity-60">{item.num}</span>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="ml-auto flex items-stretch lg:ml-0">
+          <span className="hidden items-center whitespace-nowrap border-l border-ink/25 px-3.5 text-muted sm:flex lg:hidden xl:flex" aria-hidden="true">
+            Page {page} of {nav.length}
+          </span>
+          <button
+            type="button"
+            onClick={() => setTheme(dark ? 'light' : 'dark')}
+            className="flex items-center gap-2 border-l border-ink/25 px-3.5 hover:bg-ink hover:text-paper"
+            aria-label={dark ? 'Switch to paper theme' : 'Switch to scope theme'}
           >
-            MJ<span className="text-accent">.</span>
-          </a>
-
-          <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.href.slice(1)
-              return (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => { e.preventDefault(); scrollToSection(item.href) }}
-                  className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-300 ${
-                    isActive 
-                      ? 'text-accent' 
-                      : 'text-text-muted hover:text-text-primary'
-                  }`}
-                >
-                  {item.name}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNav"
-                      className="absolute bottom-0 left-4 right-4 h-px bg-accent"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </a>
-              )
-            })}
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button
-              onClick={toggleTheme}
-              className="w-10 h-10 rounded-lg bg-bg-input border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent-glow transition-all duration-300"
-              aria-label="Toggle theme"
-            >
-              {mounted && (theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />)}
-            </button>
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="w-10 h-10 rounded-lg bg-bg-input border border-border flex items-center justify-center text-text-primary hover:text-accent transition-colors duration-300"
-                aria-label="Toggle mobile menu"
-              >
-                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            </div>
-          </div>
+            <span aria-hidden="true" className="inline-block h-3 w-3 rounded-full border border-current" style={{ background: 'linear-gradient(90deg, currentColor 50%, transparent 50%)' }} />
+            {dark ? 'Paper' : 'Scope'}
+          </button>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="index-panel"
+            className="flex items-center border-l border-ink/25 pl-3.5 lg:hidden"
+          >
+            {open ? 'Close' : 'Index'}
+          </button>
         </div>
+      </div>
 
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden border-t border-border"
-            >
-              <div className="py-4 space-y-1">
-                {navItems.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    onClick={(e) => { e.preventDefault(); scrollToSection(item.href) }}
-                    className={`block px-4 py-3 text-sm font-medium transition-colors duration-300 ${
-                      activeSection === item.href.slice(1)
-                        ? 'text-accent'
-                        : 'text-text-muted hover:text-text-primary'
-                    }`}
-                  >
-                    {item.name}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+      {open && (
+        <nav id="index-panel" aria-label="Sections" className="border-t border-ink bg-paper lg:hidden">
+          <ol className="mx-auto max-w-doc px-4 py-2 sm:px-8">
+            {nav.map((item) => (
+              <li key={item.id} className="border-b border-ink/15 last:border-0">
+                <a
+                  href={`#${item.id}`}
+                  onClick={() => setOpen(false)}
+                  className="flex items-baseline gap-4 py-3 font-mono text-sm uppercase tracking-[0.1em]"
+                >
+                  <span className="w-4 text-mark">{item.num}</span>
+                  <span className="flex-1">{item.label}</span>
+                  <span className="flex-[2] translate-y-[-3px] border-b border-dotted border-ink/40" aria-hidden="true" />
+                  <span className="text-muted">{String(nav.indexOf(item) + 1).padStart(2, '0')}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )}
     </header>
   )
 }
-
-export default Header
